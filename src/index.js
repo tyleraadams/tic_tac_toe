@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import getBoard from './models/tic_tac_toe_board';
-import boardConfig from './config/tic_tac_toe_board';
+import boardConfig from './config/tic_tac_toe_board.json';
 
 const store = createStore(baseReducer, {
   board: getBoard({width: boardConfig.width, height: boardConfig.height})

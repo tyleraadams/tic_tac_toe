@@ -1,4 +1,8 @@
+import getBoard from '../../models/tic_tac_toe_board';
+import boardConfig from '../../config/tic_tac_toe_board.json';
+
 const board = (state = [], action) => {
+   console.log('HELLO?', action.type)
   switch(action.type) {
     case 'MARK_SPACE':
       const rowIndex = action.coords[0];
@@ -12,6 +16,10 @@ const board = (state = [], action) => {
         ],
         ...state.slice(rowIndex + 1, state.length),
       ];
+    case 'CHANGE_GAME_STATUS':
+      return action.gameStatus === 'RESTART_GAME' ?
+      getBoard({width: boardConfig.width, height: boardConfig.height}) :
+      state;
     default:
       return state;
   }
