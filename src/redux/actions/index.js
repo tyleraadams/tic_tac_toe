@@ -19,7 +19,7 @@ export function changeGameStatus(gameStatus) {
 export function makePlayerMove(coords, mark) {
   return function (dispatch, getState) {
     dispatch(markSpace(coords, mark));
-    const currBoard = getState().board;
+    let currBoard = getState().board;
 
     if(checkForGameOver(currBoard) || checkForWin(currBoard, mark, coords)) {
       return dispatch(changeGameStatus('GAME_OVER'));
@@ -27,6 +27,10 @@ export function makePlayerMove(coords, mark) {
 
     const AIMove = AIPlayerMove(currBoard);
     dispatch(markSpace(AIMove.coords, AIMove.mark));
+    currBoard = getState().board;
+    if(checkForGameOver(currBoard) || checkForWin(currBoard, 'O', coords)) {
+      return dispatch(changeGameStatus('GAME_OVER'));
+    }
   };
 }
 

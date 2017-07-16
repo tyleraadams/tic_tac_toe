@@ -12,6 +12,17 @@
   justify-content: space-between;
 }
 
+.board__row svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.board__row:nth-of-type(even) {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
 .board__row--3 {
   height: calc(100% / 3);
 }
@@ -29,11 +40,19 @@
 }
 
 .board__space {
-  background: grey;
   width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid black;
+  position: relative;
+}
+
+.board__space:nth-child(even) {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+
+svg {
+  overflow: visible;
 }

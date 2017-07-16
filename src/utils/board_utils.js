@@ -13,13 +13,15 @@ export function checkForWin(board, mark, coords) {
 
   const verticalResults = board.reduce((accumulator, currArr) => {
     return accumulator.map(function(value, index) {
-      return currArr[index] === mark ? true : false;
+      console.log(currArr[index] === mark)
+      return value === mark;
     })
-  }).indexOf(true) !== -1;
+  });
+  console.log(verticalResults);
 
   const diagonalResults = checkForDiagonalWin(board, coords, mark);
 
-  return horizontalResults || verticalResults || diagonalResults;
+  return horizontalResults /*|| verticalResults */ || diagonalResults;
 }
 
 
