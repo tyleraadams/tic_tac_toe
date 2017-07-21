@@ -5,29 +5,30 @@ export function checkForGameOver(board) {
 }
 
 export function checkForWin(board, mark, coords) {
-  const numberInARowToWin = board[0].length;
-
   const horizontalResults = board.map((row) => {
     return checkForHorizontalWin(row) === mark
   }).indexOf(true) !== -1;
 
-  const verticalResults = board.reduce((accumulator, currArr) => {
-    return accumulator.map(function(value, index) {
-      console.log(currArr[index] === mark)
-      return value === mark;
-    })
-  });
-  console.log(verticalResults);
-
+  const verticalResults = checkForVerticalWin(board, coords, mark);
   const diagonalResults = checkForDiagonalWin(board, coords, mark);
 
-  return horizontalResults /*|| verticalResults */ || diagonalResults;
+  return horizontalResults || verticalResults  || diagonalResults;
 }
 
 
 function checkForHorizontalWin(row) {
  return row.reduce(function reduceRow(accumulator, curr) {
     return accumulator === curr ? accumulator : false;
+  });
+}
+
+function checkForVerticalWin(board, coords, mark) {
+  const col = coords[1];
+
+  return board.map(function(row) {
+    return row[col];
+  }).reduce(function(acc, curr, idx, arr) {
+    return acc === curr ? acc : false;
   });
 }
 
@@ -48,7 +49,6 @@ function getForwardSlash(coords, board) {
     yCounter++;
   }
 
-  console.log(xCounter);
   while (xCounter < maxLength && yCounter >= 0) {
     result.push(board[xCounter][yCounter]);
     xCounter++;
